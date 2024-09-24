@@ -1,36 +1,31 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import LoginPage from "./components/LoginPage";
-import ProfilePage from "./components/ProfilePage";
-import SignOutPage from "./components/SignOutPage";
-import SignUpPage from "./components/SignUpPage";
-import MainPage from "./components/MainPage";
+import React from "react";
+import { Button, Container, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-
-const App = () => {
-  const [token, setToken] = useState(null);
+const MainPage = ({ setToken }) => {
+  const navigate = useNavigate();
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainPage setToken={setToken} />} />{" "}
-        <Route path="/login" element={<LoginPage setToken={setToken} />} />
-        <Route path="/signup" element={<SignUpPage setToken={setToken} />} />
-        <Route
-          path="/profile"
-          element={
-            token ? <ProfilePage token={token} /> : <Navigate to="/login" />
-          }
-        />
-        <Route path="/signout" element={<SignOutPage setToken={setToken} />} />
-      </Routes>
-    </Router>
+    <Container maxWidth="sm" style={{ textAlign: "center", marginTop: "50px" }}>
+      <Typography variant="h4">Welcome to Our Bank App</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        style={{ margin: "10px" }}
+        onClick={() => navigate("/signup")}
+      >
+        Sign Up
+      </Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        style={{ margin: "10px" }}
+        onClick={() => navigate("/login")}
+      >
+        Login
+      </Button>
+    </Container>
   );
 };
 
-export default App;
+export default MainPage;
